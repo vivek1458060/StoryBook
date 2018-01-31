@@ -1,0 +1,39 @@
+<div class="container">
+  <ul id="notes" class="list-unstyled">
+
+  </ul>
+  <template id="noteTemplate">
+            <li class="well" data-id="\{{_id}}">
+              <p>
+                <strong>Heading: </strong>
+                <span class="noedit heading">\{{heading}}</span>
+                <input class="edit heading" type="text">
+              </p>
+              <p>
+                <strong>Text: </strong>
+                <span class="noedit text">\{{text}}</span>
+                <textarea class="form-control edit text" rows="5"></textarea>
+              </p>
+              <button class="remove">X</button>
+              <button class="noedit editNote">Edit</button>
+              <button class="edit saveEdit">Save</button>
+              <button class="edit cancelEdit">Cancel</button>
+            </li>
+          </template>
+
+  <h4>Add a Note</h4>
+  <form>
+    <div class="form-group">
+      <input class="form-control" id="heading" type="text" placeholder="Heading">
+    </div>
+    <div class="form-group">
+      <input class="form-control" id="text" type="text" placeholder="text">
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="private" value='private' >Private</label>
+      <label><input type="radio" name="private" value='public' >Public</label>
+    </div>
+    <input type="button" class="btn btn-primary" id="add-note" value="Add">
+  </form>
+
+</div>

@@ -1,0 +1,36 @@
+html {
+  position: relative;
+  min-height: 100%
+}
+footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #f2f2f2;
+  line-height: 70px;
+  height: 70px;
+  text-align: center;
+}
+body {
+  margin-bottom: 90px;
+}
+ul li .edit{
+  display:none;
+}
+ul li.edit .edit{
+  display:initial;
+}
+ul li.edit .noedit{
+  display:none
+}
+#loginErr{
+  background-color: #BE4B49;
+  color: white;
+  padding:5px;
+  border:1px solid red;
+  border-radius: 5px;
+  display:none;
+}
+button[name="myStoryToken"]{
+  margin-top:6px;
+}

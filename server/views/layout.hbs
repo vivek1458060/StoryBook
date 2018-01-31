@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap 101 Template</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://localhost:3000/css/style.css">
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">StoryBook</a>
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="navbar-collapse collapse">
+
+        <ul class="nav navbar-nav navbar-right">
+          <li id="signUpIcon"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li id="loginIcon"><a data-toggle="collapse" href="#loginDiv"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+        <a href="/stories/public" class="btn btn-warning btn-xs navbar-btn navbar-right"><span class="glyphicon glyphicon-book"></span> Read Public stories</a>
+
+        <form onsubmit="return getToken('myStoryToken');" class="navbar-form navbar-right" action="/editstory" method="post">
+          <button name="myStoryToken" id="myStoryToken" type="submit" class="btn btn-success btn-xs" value="">My Own Story</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  {{{body}}}
+
+  <footer>
+    <span class="text-muted">Jquery Request to Node-API: &copy;</span>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+  <script src="http://localhost:3000/js/custom.js"></script>
+</body>
+
+</html>

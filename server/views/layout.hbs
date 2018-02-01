@@ -24,16 +24,17 @@
         </button>
       </div>
       <div class="navbar-collapse collapse">
-
         <ul class="nav navbar-nav navbar-right">
-          <li id="signUpIcon"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li id="loginIcon"><a data-toggle="collapse" href="#loginDiv"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li><a href="/userProfile/{{user._id}}">{{user.fullName}}</a></li>
+          <li><a href="/login" id="navUserLink">SignUp/Login</a></li>
         </ul>
+
         <a href="/stories/public" class="btn btn-warning btn-xs navbar-btn navbar-right"><span class="glyphicon glyphicon-book"></span> Read Public stories</a>
 
         <form onsubmit="return getToken('myStoryToken');" class="navbar-form navbar-right" action="/editstory" method="post">
           <button name="myStoryToken" id="myStoryToken" type="submit" class="btn btn-success btn-xs" value="">My Own Story</button>
         </form>
+        </div>
       </div>
     </div>
   </nav>
@@ -41,7 +42,7 @@
   {{{body}}}
 
   <footer>
-    <span class="text-muted">Jquery Request to Node-API: &copy;</span>
+    <span class="text-muted">StoryBook: &copy; 2018</span>
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

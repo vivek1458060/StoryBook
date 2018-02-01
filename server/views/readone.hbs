@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" id="oneStory">
       <h2>{{heading}}</h2>
       <div class="panel panel-default">
         <div class="panel-body">
@@ -19,14 +19,17 @@
           <p>{{text}}</p>
         </div>
       </div>
-      <div class="panel panel-default">
+      <div class="panel panel-default" id="loginSuggestionDivToComment">
         <div class="panel-body">
           <h4>Comments</h4>
-          <p>Please <a href="#">login</a> to leave a comment</p>
+          <p>Please <a href="/login">login</a> to leave a comment</p>
         </div>
       </div>
+      <div class="panel panel-default">
+        <input class="form-control input-lg comment" id="{{storyId}}" type="text" placeholder="Write a comment">
+      </div>
       {{#each comments}}
-        <div class="well">
+        <div class="well" >
           <p>{{comment}}
             <a href="getprofile/{{commentedBy_userId}}" class="btn btn-default btn-xs" style="border-radius:10px;"><span class="glyphicon glyphicon-user"></span> {{commentedBy_userName}}</a>
           </p>
@@ -35,5 +38,4 @@
       {{/each}}
     </div>
   </div>
-
 </div>

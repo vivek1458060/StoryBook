@@ -1,19 +1,59 @@
 var token = localStorage.getItem('token');
 
 function getToken(id) {
-    $(`#${id}`).val(token);
-    return true;
+  $(`#${id}`).val(token);
+  return true;
 };
+
+$.ajax({
+  type: 'GET',
+  url: '/verifytoken',
+  headers: { 'x-auth': localStorage.getItem('token') },
+  success: function(user) {
+    $('#navUserLink').html(user.fullName);
+    $('#navUserLink').attr('href', `/userProfile/${user._id}`);
+    $('#loginSuggestionDivToComment').remove();
+  }
+});
 
 $(function() {
 
-  if(token) {
+  if (token) {
 
     $.ajaxSetup({
-    headers: {
-      'x-auth': token
+      headers: {
+        'x-auth': token
+      }
+    });
+
+    $('.comment').on('keyup', function(e) {
+      $comment = $('.comment');
+      if (e.keyCode === 13) {
+      var note = {
+        comment: $comment.val(),
+      };
+
+      $.ajax({
+        type: 'PATCH',
+        url: `/stories/comment/${$comment.attr('id')}`,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(note),
+        success: function(comments) {
+            $('#oneStory').append(`
+              <div class="well" >
+                <p>${comments.comment}
+                  <a href="getprofile/${comments.commentedBy_userId}" class="btn btn-default btn-xs" style="border-radius:10px;"><span class="glyphicon glyphicon-user"></span> ${comments.commentedBy_userName}</a>
+                </p>
+                <small>${new Date()}</small>
+              </div>
+              `);
+        },
+        error: function() {
+          alert('error commenting');
+        }
+      });
     }
-  });
+    });
 
     var $notes = $('#notes');
     var $heading = $('#heading');
@@ -34,9 +74,9 @@ $(function() {
       url: '/stories',
       success: function(notes) {
         $.each(notes.stories, function(i, note) {
-           $signUpIcon.html('');
-           $loginIcon.html('');
-           addNote(note);
+          $signUpIcon.html('');
+          $loginIcon.html('');
+          addNote(note);
         });
       },
       error: function() {
@@ -52,7 +92,7 @@ $(function() {
         text: $text.val()
       };
 
-      if($private === 'private'){
+      if ($private === 'private') {
         note.private = true;
       } else {
         note.private = false;
@@ -61,7 +101,7 @@ $(function() {
       $.ajax({
         type: 'POST',
         url: '/stories',
-        contentType:'application/json; charset=utf-8',
+        contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(note),
         success: function(newNote) {
           addNote(newNote.story);
@@ -101,7 +141,7 @@ $(function() {
       $li.removeClass('edit');
     });
 
-    $notes.delegate('.saveEdit','click', function() {
+    $notes.delegate('.saveEdit', 'click', function() {
       $li = $(this).closest('li');
 
       var note = {
@@ -124,6 +164,6 @@ $(function() {
         }
       });
     });
-  };
 
+  }
 });

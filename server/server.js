@@ -20,13 +20,16 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 
+app.get('/verifytoken',authenticate, (req, res) => {
+   res.send(req.user);
+});
 
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.post('/editstory', [parseFormHeaderToken, authenticate], (req, res) => {
-    res.render('editstory');
+app.get('/login', (req, res) => {
+  res.render('login', {layout: false});
 });
 
 //add new story
@@ -44,6 +47,10 @@ app.post('/stories', authenticate, (req, res) => {
    }).catch((e) => {
      res.status(400).send(e);
    });
+});
+
+app.post('/editstory', [parseFormHeaderToken, authenticate], (req, res) => {
+    res.render('editstory');
 });
 
 //get all public strories
@@ -95,7 +102,8 @@ app.get('/stories/public/:id', (req, res) => {
       return res.status(404).send();
     }
 
-    res.render('readone',{
+    res.render('readone', {
+      storyId: id,
       heading: story.heading,
       text: story.text,
       creatorName: story.creatorName,
@@ -154,7 +162,7 @@ app.patch('/stories/:id',authenticate, (req, res) => {
 });
 
 //comment on a story
-app.patch('/stories/comment/:id',authenticate, (req, res) => {
+app.patch('/stories/comment/:id', authenticate, (req, res) => {
   var id = req.params.id;
   var body = _.pick(req.body, ['comment']);
 
@@ -170,12 +178,17 @@ app.patch('/stories/comment/:id',authenticate, (req, res) => {
       return res.status(404).send();
     }
 
-    res.send({story});
+    res.send({
+      comment: body.comment,
+      commentedBy_userId: req.user._id,
+      commentedBy_userName: req.user.fullName
+    });
   }).catch((e) => {
     res.status(400).send(e);
   })
 });
 
+//SignUp route
 app.post('/users', (req, res) => {
   var body = _.pick(req.body, ['fullName', 'email', 'password']);
   var user = new User(body);
@@ -185,7 +198,7 @@ app.post('/users', (req, res) => {
   }).then((token) => {
     res.header('x-auth', token).send(user);
   }).catch((e) => {
-    res.status(400).send(e);
+    res.status(400).send();
   });
 });
 
@@ -193,6 +206,7 @@ app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
 });
 
+//login route
 app.post('/users/login', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
 

@@ -13,6 +13,10 @@ footer{
 }
 body {
   margin-bottom: 90px;
+  /* background-image: url('/images/background.jpg');
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center; */
 }
 ul li .edit{
   display:none;
@@ -23,14 +27,20 @@ ul li.edit .edit{
 ul li.edit .noedit{
   display:none
 }
-#loginErr{
+#loginErr, #signUpErr{
   background-color: #BE4B49;
   color: white;
   padding:5px;
-  border:1px solid red;
+  border:1px solid #FAEEEE;
   border-radius: 5px;
-  display:none;
+  display: none;
 }
 button[name="myStoryToken"]{
   margin-top:6px;
+}
+.comment{
+  border-radius: 50px;
+}
+.well{
+  background-color: #FFD180;
 }

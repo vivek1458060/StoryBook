@@ -1,6 +1,6 @@
 html {
   position: relative;
-  min-height: 100%
+  min-height: 100%;
 }
 footer{
   position: absolute;
@@ -12,11 +12,15 @@ footer{
   text-align: center;
 }
 body {
-  margin-bottom: 90px;
-  /* background-image: url('/images/background.jpg');
-  background-repeat:no-repeat;
-  background-size:contain;
-  background-position:center; */
+   margin-bottom: 90px;
+
+   background-image: url('/images/background.png');
+
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 ul li .edit{
   display:none;
@@ -35,12 +39,16 @@ ul li.edit .noedit{
   border-radius: 5px;
   display: none;
 }
-button[name="myStoryToken"]{
-  margin-top:6px;
+#myStory{
+  margin-right: 10px;
 }
+
 .comment{
   border-radius: 50px;
 }
 .well{
   background-color: #FFD180;
+}
+#editPageLogin{
+  font-size: 25px;
 }

@@ -9,7 +9,6 @@ var {mongoose} = require('./db/mongoose');
 var {Story} = require('./models/story');
 var {User} = require('./models/user');
 var {authenticate} = require('./middleware/authenticate');
-var parseFormHeaderToken = require('./middleware/parseFormHeaderToken');
 
 var app = express();
 
@@ -49,7 +48,7 @@ app.post('/stories', authenticate, (req, res) => {
    });
 });
 
-app.post('/editstory', [parseFormHeaderToken, authenticate], (req, res) => {
+app.get('/editstory', (req, res) => {
     res.render('editstory');
 });
 

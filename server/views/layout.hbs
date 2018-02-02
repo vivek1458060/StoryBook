@@ -24,16 +24,13 @@
         </button>
       </div>
       <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/userProfile/{{user._id}}">{{user.fullName}}</a></li>
-          <li><a href="/login" id="navUserLink">SignUp/Login</a></li>
+        <ul class="nav navbar-nav navbar-right navUserLink">
+          <li><a href="/login">SignUp/Login</a></li>
         </ul>
 
-        <a href="/stories/public" class="btn btn-warning btn-xs navbar-btn navbar-right"><span class="glyphicon glyphicon-book"></span> Read Public stories</a>
+          <a href="/stories/public" class="navbar-btn btn btn-warning btn-xs navbar-right"><span class="glyphicon glyphicon-book"></span> Read Public stories</a>
+          <a href="/editstory" id="myStory" class="navbar-btn navbar-right btn btn-success btn-xs" >My Own Story</a>
 
-        <form onsubmit="return getToken('myStoryToken');" class="navbar-form navbar-right" action="/editstory" method="post">
-          <button name="myStoryToken" id="myStoryToken" type="submit" class="btn btn-success btn-xs" value="">My Own Story</button>
-        </form>
         </div>
       </div>
     </div>

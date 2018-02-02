@@ -1,18 +1,30 @@
 var token = localStorage.getItem('token');
 
-function getToken(id) {
-  $(`#${id}`).val(token);
-  return true;
-};
-
 $.ajax({
   type: 'GET',
   url: '/verifytoken',
   headers: { 'x-auth': localStorage.getItem('token') },
   success: function(user) {
-    $('#navUserLink').html(user.fullName);
-    $('#navUserLink').attr('href', `/userProfile/${user._id}`);
+    $('.navUserLink').empty().append(`
+      <li><a href="/userProfile/${user._id}">${user.fullName}</a></li>
+      <li><a href="#" id="logout">Logout</a></li>
+    `);
     $('#loginSuggestionDivToComment').remove();
+    $('#editPageLogin').remove();
+    $('#add-note').removeClass('disabled');
+  },
+  error: function() {
+    token = null;
+
+    $('.editPage').prepend(`
+      <div class="panel panel-default">
+       <div class="panel-body">
+        <p id="editPageLogin">Login to Get, Edit and Write your new story</p>
+        <a href="/login" class="btn btn-primary" id="logout">Login Here</a>
+       </div>
+      </div>
+    `);
+
   }
 });
 
@@ -24,6 +36,20 @@ $(function() {
       headers: {
         'x-auth': token
       }
+    });
+
+    $('.navUserLink').delegate('#logout', 'click', function() {
+      $.ajax({
+        type: 'DELETE',
+        url: '/users/me/token',
+        success: function() {
+          localStorage.removeItem('token');
+          window.open('/', '_self');
+        },
+        error: function() {
+          alert('error logging out');
+        }
+      });
     });
 
     $('.comment').on('keyup', function(e) {
@@ -39,6 +65,7 @@ $(function() {
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(note),
         success: function(comments) {
+            $comment.val('');
             $('#oneStory').append(`
               <div class="well" >
                 <p>${comments.comment}
@@ -59,8 +86,6 @@ $(function() {
     var $heading = $('#heading');
     var $text = $('#text');
     var $remove = $('.remove');
-    var $signUpIcon = $('#signUpIcon');
-    var $loginIcon = $('#loginIcon');
 
     var noteTemplate = $('#noteTemplate').html();
     var template = Handlebars.compile(noteTemplate);
@@ -74,8 +99,6 @@ $(function() {
       url: '/stories',
       success: function(notes) {
         $.each(notes.stories, function(i, note) {
-          $signUpIcon.html('');
-          $loginIcon.html('');
           addNote(note);
         });
       },
@@ -164,6 +187,5 @@ $(function() {
         }
       });
     });
-
   }
 });

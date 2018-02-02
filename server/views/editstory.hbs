@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-8 col-sm-offset-2 editPage">
         <ul id="notes" class="list-unstyled"></ul>
 
         <template id="noteTemplate">
@@ -22,8 +22,8 @@
                   </li>
                 </template>
 
-        <br/><br/><h3>Add a new Story</h3>
         <form>
+          <h3>Add a new Story</h3>
           <div class="form-group">
             <input class="form-control" id="heading" type="text" placeholder="Story heading">
           </div>
@@ -34,7 +34,7 @@
             <label><input type="radio" name="private" value='private' >Private</label>
             <label><input type="radio" name="private" value='public' >Public</label>
           </div>
-          <input type="button" class="btn btn-primary" id="add-note" value="Add">
+          <input type="button" class="btn btn-primary disabled" id="add-note" value="Add">
         </form>
     </div>
   </div>

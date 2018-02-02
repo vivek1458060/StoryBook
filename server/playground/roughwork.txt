@@ -1,0 +1,28 @@
+<form onsubmit="return getToken('myStoryToken');" class="navbar-form navbar-right" action="/editstory" method="post">
+  <button name="myStoryToken" id="myStoryToken" type="submit" class="btn btn-success btn-xs" value="">My Own Story</button>
+</form>
+
+app.post('/editstory', [parseFormHeaderToken, authenticate], (req, res) => {
+   res.render('editstory');
+ });
+
+ function getToken(id) {
+   $(`#${id}`).val(token);
+   return true;
+ };
+
+ //middleware
+
+ module.exports = (req, res, next) => {
+
+   var token = req.body.myStoryToken;
+   console.log(token);
+
+   if(token) {
+
+     req.headers['x-auth'] = token;
+     next();
+   } else {
+     res.status(401).send();
+   }
+ }

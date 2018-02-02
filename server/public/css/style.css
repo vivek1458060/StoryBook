@@ -52,3 +52,7 @@ ul li.edit .noedit{
 #editPageLogin{
   font-size: 25px;
 }
+.dropdown-menu-item{
+  width:260px;
+  padding:10px;
+}

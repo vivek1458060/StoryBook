@@ -1,3 +1,8 @@
+<div class="jumbotron">
+  <div class="container text-center">
+  <h3>{{stories.0.creatorName}}</h3>
+</div>
+</div>
 <div class="container">
   <h2>Stories</h2>
   <div class="row">
@@ -8,7 +13,7 @@
             <h4>{{heading}}</h4>
             <p>{{shorten_story_words_length text}}</p>
             <br/><br/>
-            <a href="/publicprofile/{{_creator}}" class="badge" style="border-radius:10px;background-color:#F0AD4E"><span class="glyphicon glyphicon-user"></span> {{creatorName}}</a>
+            <span class="badge" style="border-radius:10px;background-color:#F0AD4E"><span class="glyphicon glyphicon-user"></span> {{creatorName}}</span>
           </div>
           <div class="panel-footer text-center">
             <a href="/stories/public/{{id}}" class="btn btn-primary btn-sm btn-block">Read More</a>

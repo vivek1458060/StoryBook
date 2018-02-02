@@ -7,11 +7,11 @@
           <img src="/images/person.png" class="img-thumbnail img-circle center-block"><br/>
         </div>
         <div class="panel-footer text-center">
-          <a href="/stories/{{creator}}" class="btn btn-link btn-sm">More from {{creatorName}}</a>
+          <a href="/publicprofile/{{creator}}" class="btn btn-link btn-sm">More from {{creatorName}}</a>
         </div>
       </div>
     </div>
-    <div class="col-md-6" id="oneStory">
+    <div class="col-md-6">
       <h2>{{heading}}</h2>
       <div class="panel panel-default">
         <div class="panel-body">
@@ -28,14 +28,16 @@
       <div class="panel panel-default">
         <input class="form-control input-lg comment" id="{{storyId}}" type="text" placeholder="Write a comment">
       </div>
-      {{#each comments}}
-        <div class="well" >
-          <p>{{comment}}
-            <a href="getprofile/{{commentedBy_userId}}" class="btn btn-default btn-xs" style="border-radius:10px;"><span class="glyphicon glyphicon-user"></span> {{commentedBy_userName}}</a>
-          </p>
-          <small>{{commentedAt}}</small>
-        </div>
-      {{/each}}
+      <div id="oneStory">
+        {{#each comments}}
+          <div class="well">
+            <p>{{comment}}
+              <a href="/publicprofile/{{commentedBy_userId}}" class="btn btn-default btn-xs" style="border-radius:10px;"><span class="glyphicon glyphicon-user"></span> {{commentedBy_userName}}</a>
+            </p>
+            <small>{{commentedAt}}</small>
+          </div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </div>

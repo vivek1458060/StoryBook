@@ -6,8 +6,24 @@ $.ajax({
   headers: { 'x-auth': localStorage.getItem('token') },
   success: function(user) {
     $('.navUserLink').empty().append(`
-      <li><a href="/userProfile/${user._id}">${user.fullName}</a></li>
-      <li><a href="#" id="logout">Logout</a></li>
+      <li class="dropdown">
+         <a  href="#" class="dropdown-toggle navUserName" data-toggle="dropdown">${user.fullName}</a>
+         <ul class="dropdown-menu">
+            <li class="dropdown-menu-item">
+               <div class="media">
+                  <div class="media-left">
+                    <img src="/images/profile.png" class="media-object img-thumbnail img-circle" width="80" height="90">
+                  </div>
+                  <div class="media-body text-sm">
+                    <small class="media-heading"><strong>${user.fullName}</strong><br/>
+                    ${user.email}
+                    </small><br/>
+                    <a href="#" id="logout" class="btn btn-primary" style="margin-top:5px;">Logout</a>
+                  </div>
+               </div>
+            </li>
+         </ul>
+      </li>
     `);
     $('#loginSuggestionDivToComment').remove();
     $('#editPageLogin').remove();
@@ -66,10 +82,10 @@ $(function() {
         data: JSON.stringify(note),
         success: function(comments) {
             $comment.val('');
-            $('#oneStory').append(`
+            $('#oneStory').prepend(`
               <div class="well" >
                 <p>${comments.comment}
-                  <a href="getprofile/${comments.commentedBy_userId}" class="btn btn-default btn-xs" style="border-radius:10px;"><span class="glyphicon glyphicon-user"></span> ${comments.commentedBy_userName}</a>
+                  <a href="/publicprofile/${comments.commentedBy_userId}" class="btn btn-default btn-xs" style="border-radius:10px;"><span class="glyphicon glyphicon-user"></span> ${comments.commentedBy_userName}</a>
                 </p>
                 <small>${new Date()}</small>
               </div>
@@ -127,6 +143,8 @@ $(function() {
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(note),
         success: function(newNote) {
+          $heading.val('');
+          $text.val('');
           addNote(newNote.story);
         },
         error: function() {

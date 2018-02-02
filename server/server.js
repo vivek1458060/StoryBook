@@ -19,6 +19,16 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
 
+hbs.registerHelper('shorten_story_words_length', function(text) {
+  var words = text.split(/\s+/gi);
+  var wordCount = words.length;
+  if(wordCount > 20){
+    return words.slice(0, 20).join(' ') + '...';
+  }else {
+    return text
+  }
+})
+
 app.get('/verifytoken',authenticate, (req, res) => {
    res.send(req.user);
 });
@@ -63,32 +73,21 @@ app.get('/stories/public', (req, res) => {
   });
 });
 
-//get all strories of authenticated user
-app.get('/stories',authenticate, (req, res) => {
-  Story.find({
-    _creator: req.user._id
-  }).then((stories) => {
-    res.send({stories});
-  }).catch((e) => {
-    res.status(400).send(e);
-  });
-});
-
 //get all public stories from an individual user
-app.get('/stories/:id', (req, res) => {
+app.get('/publicprofile/:id', (req, res) => {
   var id = req.params.id;
 
   Story.find({
     _creator: id,
     private: false
   }).then((stories) => {
-    res.render('publicstories', {stories});
+    res.render('publicProfile', {stories});
   }).catch((e) => {
     res.status(400).send(e);
   });
 });
 
-//get individual public story
+//get One public story
 app.get('/stories/public/:id', (req, res) => {
   var id = req.params.id;
 
@@ -109,6 +108,17 @@ app.get('/stories/public/:id', (req, res) => {
       creator: story._creator,
       comments: story.comments
     });
+  }).catch((e) => {
+    res.status(400).send(e);
+  });
+});
+
+//get all strories of authenticated(active) user
+app.get('/stories',authenticate, (req, res) => {
+  Story.find({
+    _creator: req.user._id
+  }).then((stories) => {
+    res.send({stories});
   }).catch((e) => {
     res.status(400).send(e);
   });

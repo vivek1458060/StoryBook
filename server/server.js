@@ -27,7 +27,11 @@ hbs.registerHelper('shorten_story_words_length', function(text) {
   }else {
     return text
   }
-})
+});
+
+hbs.registerHelper('formatDate', function(timestamp) {
+   return moment(timestamp).format("LLLL");
+});
 
 app.get('/verifytoken',authenticate, (req, res) => {
    res.send(req.user);
@@ -101,12 +105,8 @@ app.get('/stories/public/:id', (req, res) => {
     }
 
     res.render('readone', {
-      storyId: id,
-      heading: story.heading,
-      text: story.text,
-      creatorName: story.creatorName,
-      creator: story._creator,
-      comments: story.comments
+      story,
+      createdAt: story._id.getTimestamp()
     });
   }).catch((e) => {
     res.status(400).send(e);
@@ -181,17 +181,14 @@ app.patch('/stories/comment/:id', authenticate, (req, res) => {
 
   body.commentedBy_userName = req.user.fullName;
   body.commentedBy_userId = req.user._id;
+  body.commentedAt = new Date().getTime();
 
   Story.findOneAndUpdate({_id: id}, {$push: {comments: body}}, {new: true}).then((story) => {
     if(!story) {
       return res.status(404).send();
     }
 
-    res.send({
-      comment: body.comment,
-      commentedBy_userId: req.user._id,
-      commentedBy_userName: req.user.fullName
-    });
+    res.send(body);
   }).catch((e) => {
     res.status(400).send(e);
   })

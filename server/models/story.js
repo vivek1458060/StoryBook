@@ -26,10 +26,7 @@ var Story = mongoose.model('Story', {
     default: null
   },
   comments: [{
-    commentedAt: {
-      type: Date,
-      default: Date.now
-    },
+    commentedAt: { type: Number },
     comment: {
       type: String,
       required: true,

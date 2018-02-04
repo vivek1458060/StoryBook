@@ -87,7 +87,7 @@ $(function() {
                 <p>${comments.comment}
                   <a href="/publicprofile/${comments.commentedBy_userId}" class="btn btn-default btn-xs" style="border-radius:10px;"><span class="glyphicon glyphicon-user"></span> ${comments.commentedBy_userName}</a>
                 </p>
-                <small>${new Date()}</small>
+                <small>${moment(comments.commentedAt).format("LLLL")}</small>
               </div>
               `);
         },

@@ -3,20 +3,20 @@
     <div class="col-md-2 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-body text-center">
-          <h4>{{creatorName}}</h4>
+          <h4>{{story.creatorName}}</h4>
           <img src="/images/person.png" class="img-thumbnail img-circle center-block"><br/>
         </div>
         <div class="panel-footer text-center">
-          <a href="/publicprofile/{{creator}}" class="btn btn-link btn-sm">More from {{creatorName}}</a>
+          <a href="/publicprofile/{{story._creator}}" class="btn btn-link btn-sm">More from {{story.creatorName}}</a>
         </div>
       </div>
     </div>
     <div class="col-md-6">
-      <h2>{{heading}}</h2>
+      <h2>{{story.heading}}</h2>
       <div class="panel panel-default">
         <div class="panel-body">
-          <h4>January 31st 2018</h4>
-          <p>{{text}}</p>
+          <h5 class="text-muted">{{formatDate createdAt}}</h5>
+          <p>{{story.text}}</p>
         </div>
       </div>
       <div class="panel panel-default" id="loginSuggestionDivToComment">
@@ -26,15 +26,15 @@
         </div>
       </div>
       <div class="panel panel-default">
-        <input class="form-control input-lg comment" id="{{storyId}}" type="text" placeholder="Write a comment">
+        <input class="form-control input-lg comment" id="{{story._id}}" type="text" placeholder="Write a comment">
       </div>
       <div id="oneStory">
-        {{#each comments}}
+        {{#each story.comments}}
           <div class="well">
             <p>{{comment}}
               <a href="/publicprofile/{{commentedBy_userId}}" class="btn btn-default btn-xs" style="border-radius:10px;"><span class="glyphicon glyphicon-user"></span> {{commentedBy_userName}}</a>
             </p>
-            <small>{{commentedAt}}</small>
+            <small>{{formatDate commentedAt}}</small>
           </div>
         {{/each}}
       </div>

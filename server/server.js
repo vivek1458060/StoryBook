@@ -1,3 +1,4 @@
+var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('lodash');
@@ -11,10 +12,11 @@ var {User} = require('./models/user');
 var {authenticate} = require('./middleware/authenticate');
 
 var app = express();
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname , 'public')));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
@@ -234,6 +236,6 @@ app.delete('/users/me/token',authenticate, (req, res) => {
   })
 });
 
-app.listen(3000, () => {
-  console.log('Server started up on port 3000');
+app.listen(port, () => {
+  console.log(`Server started up on port ${port}`);
 });

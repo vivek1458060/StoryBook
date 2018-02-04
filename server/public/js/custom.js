@@ -1,5 +1,4 @@
 var token = localStorage.getItem('token');
-
 $.ajax({
   type: 'GET',
   url: '/verifytoken',

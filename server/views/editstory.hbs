@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2 editPage">
-        <ul id="notes" class="list-unstyled"></ul>
+      <ul id="notes" class="list-unstyled"></ul>
 
-        <template id="noteTemplate">
+      <template id="noteTemplate">
                   <li class="well" data-id="\{{_id}}">
                     <p>
                       <strong>Heading: </strong>
@@ -20,22 +20,22 @@
                     <button class="edit saveEdit btn btn-success">Save</button>
                     <button class="edit cancelEdit btn btn-primary">Cancel</button>
                   </li>
-                </template>
+      </template>
 
-        <form>
-          <h3>Add a new Story</h3>
-          <div class="form-group">
-            <input class="form-control" id="heading" type="text" placeholder="Story heading">
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" id="text" rows="5" placeholder="Write your story"></textarea>
-          </div>
-          <div class="radio">
-            <label><input type="radio" name="private" value='private' >Private</label>
-            <label><input type="radio" name="private" value='public' >Public</label>
-          </div>
-          <input type="button" class="btn btn-primary disabled" id="add-note" value="Add">
-        </form>
+      <form>
+        <h3>Add a new Story</h3>
+        <div class="form-group">
+          <input class="form-control" id="heading" type="text" placeholder="Story heading">
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" id="text" rows="5" placeholder="Write your story"></textarea>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="private" value='private' >Private</label>
+          <label><input type="radio" name="private" value='public' >Public</label>
+        </div>
+        <input type="button" class="btn btn-primary disabled" id="add-note" value="Add">
+      </form>
     </div>
   </div>
 

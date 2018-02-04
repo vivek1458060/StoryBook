@@ -1,3 +1,5 @@
+require('./config/config');
+
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -12,7 +14,7 @@ var {User} = require('./models/user');
 var {authenticate} = require('./middleware/authenticate');
 
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

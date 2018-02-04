@@ -1,0 +1,12 @@
+{
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/storybookTest",
+    "JWT_SECRET": "123dsfr@#"
+  },
+  "development": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/storybook",
+    "JWT_SECRET": "12hgyh3dsfr@#"
+  }
+}

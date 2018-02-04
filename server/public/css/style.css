@@ -46,13 +46,11 @@ ul li.edit .noedit{
 .comment{
   border-radius: 50px;
 }
-.well{
-  background-color: #FFD180;
-}
+
 #editPageLogin{
   font-size: 25px;
 }
-.dropdown-menu-item{
+.dropdown-menu-item {
   width:260px;
   padding:10px;
 }

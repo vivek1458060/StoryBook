@@ -1,30 +1,57 @@
 <div class="jumbotron">
-  <div class="container text-center">
-  <h3>{{stories.0.creatorName}}</h3>
-</div>
+  <div class="container">
+    <div class="col-md-2 col-md-offset-3  text-center">
+      <img id="myImage" src="/uploads/{{#if image}}{{image}}{{else}}demodp.jpg{{/if}}" alt="myImage" class="img-responsive img-circle center-block">
+      <form id="imageUploadForm">
+        <label for="file-upload" class="custom-file-upload form-control">
+          <i class="glyphicon glyphicon-upload"></i> Upload image
+        </label>
+        <input id="file-upload" type="file" name="myImage"/>
+        <input type="submit" class="btn btn-xs btn-primary">
+      </form>
+    </div>
+    <h3 class="text-primary">
+      <strong>{{stories.0.creatorName}}</strong>
+    </h3>
+    <p>Student at
+      <strong>Heritage institute of technology</strong>
+    </p>
+    <p>
+      <span class="glyphicon glyphicon-map-marker"></span> Chhapra, Bihar</p>
+  </div>
 </div>
 <div class="container">
   <h2>Stories</h2>
   <div class="row">
     {{#each stories}}
-      <div class="col-md-4 col-sm-6">
-        <div class="panel panel-default">
-          <div class="panel-body text-center">
-            <h4>{{heading}}</h4>
-            <p>{{shorten_story_words_length text}}</p>
-            <br/><br/>
-            <span class="badge" style="border-radius:10px;background-color:#F0AD4E"><span class="glyphicon glyphicon-user"></span> {{creatorName}}</span>
-          </div>
-          <div class="panel-footer text-center">
-            <a href="/stories/public/{{id}}" class="btn btn-primary btn-sm btn-block">Read More</a>
-          </div>
+    <div class="col-md-4 col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-body text-center">
+          <h4>{{heading}}</h4>
+          <p>{{shorten_story_words_length text}}</p>
+          <br/>
+          <br/>
+          <span class="badge" style="border-radius:10px;background-color:#F0AD4E">
+            <span class="glyphicon glyphicon-user"></span> {{creatorName}}</span>
+        </div>
+        <div class="panel-footer text-center">
+          <a href="/stories/public/{{id}}" class="btn btn-primary btn-sm btn-block">Read More</a>
         </div>
       </div>
+    </div>
     {{/each}}
   </div>
 </div>
 <style>
-  .navbar{
+  .navbar {
     margin-bottom: 0px;
   }
+  input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+    background-color: bisque;
+    cursor: pointer;
+    margin-top:5px;
+}
 </style>

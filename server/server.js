@@ -12,6 +12,7 @@ var {mongoose} = require('./db/mongoose');
 var {Story} = require('./models/story');
 var {User} = require('./models/user');
 var {authenticate} = require('./middleware/authenticate');
+var {upload} = require('./server-utils/multer');
 
 var app = express();
 const port = process.env.PORT
@@ -89,7 +90,12 @@ app.get('/publicprofile/:id', (req, res) => {
     _creator: id,
     private: false
   }).then((stories) => {
-    res.render('publicProfile', {stories});
+    return User.findById(id).then((user) => {
+      res.render('publicProfile', {
+        stories,
+        image: user.imageName
+      });
+    });
   }).catch((e) => {
     res.status(400).send(e);
   });
@@ -107,10 +113,14 @@ app.get('/stories/public/:id', (req, res) => {
     if(!story) {
       return res.status(404).send();
     }
-
-    res.render('readone', {
+    
+    return User.findById(story._creator).then((user) => {
+      console.log(user);
+      res.render('readone', {
       story,
+      creatorImage: user.imageName,
       createdAt: story._id.getTimestamp()
+      });
     });
   }).catch((e) => {
     res.status(400).send(e);
@@ -236,6 +246,26 @@ app.delete('/users/me/token',authenticate, (req, res) => {
   }).catch((e) => {
     res.status(400).send(e);
   })
+});
+
+//image upload
+app.post('/upload', authenticate, (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      if (req.file == undefined) {
+        res.status(400).send('Error: No File Selected!');
+      } else {
+        User.findByIdAndUpdate({_id: req.user._id}, {$set: {imageName: req.file.filename}}, {new: true}).then((user) => {
+          console.log(user);
+        }, (err) => {
+          console.log(err);
+        });
+        res.status(200).send({filename: req.file.filename});
+      }
+    }
+  });
 });
 
 app.listen(port, () => {

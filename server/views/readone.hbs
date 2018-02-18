@@ -4,7 +4,7 @@
       <div class="panel panel-default">
         <div class="panel-body text-center">
           <h4>{{story.creatorName}}</h4>
-          <img src="/images/person.png" class="img-thumbnail img-circle center-block"><br/>
+          <img src="/uploads/{{#if creatorImage}}{{creatorImage}}{{else}}demodp.jpg{{/if}}" class="img-thumbnail img-circle center-block"><br/>
         </div>
         <div class="panel-footer text-center">
           <a href="/publicprofile/{{story._creator}}" class="btn btn-link btn-sm">More from {{story.creatorName}}</a>

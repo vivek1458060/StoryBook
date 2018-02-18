@@ -24,6 +24,9 @@ var UserSchema = mongoose.Schema({
       message: `{VALUE} is not a valid email`
     }
   },
+  imageName: {
+    type: String
+  },
   password: {
     type: String,
     required: true,

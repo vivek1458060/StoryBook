@@ -52,6 +52,35 @@ $(function() {
         'x-auth': token
       }
     });
+    
+    //image upload
+    $("#imageUploadForm").submit(function (event) {
+      event.preventDefault();
+      var form = $('#imageUploadForm')[0];
+      var data = new FormData(form);
+    
+      $.ajax({
+          type: "POST",
+          enctype: 'multipart/form-data',
+          url: "/upload",
+          data: data,
+          processData: false,
+          contentType: false,
+          cache: false,
+          timeout: 600000,
+          success: function (data) {
+    
+              $('#myImage').attr('src', '/uploads/'+ data.filename);
+              alert('success');
+    
+          },
+          error: function (e) {
+    
+              alert(e.responseText);
+    
+          }
+      });
+    });
 
     $('.navUserLink').delegate('#logout', 'click', function() {
       $.ajax({

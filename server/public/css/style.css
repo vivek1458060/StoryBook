@@ -6,21 +6,37 @@ footer{
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: #f2f2f2;
-  line-height: 70px;
-  height: 70px;
+  background-color: #5C5757;
+  line-height: 50px;
+  height: 50px;
   text-align: center;
+}
+footer span{
+  color:lightgrey;
 }
 body {
    margin-bottom: 90px;
-
-   background-image: url('/images/background.png');
+   background-color:#EE6E73;
+   /* background-image: url('/images/background.png');
 
     height: 100%;
 
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
+}
+.navbar-default{
+  background-color: #5C5757;
+  border-color: #5C5757;
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a{
+  color:lightgray;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover{
+  color:white;
+}
+.pageIntroDiv{
+  color:white;
 }
 ul li .edit{
   display:none;

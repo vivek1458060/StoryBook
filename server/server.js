@@ -30,7 +30,7 @@ hbs.registerHelper('shorten_story_words_length', function(text) {
   if(wordCount > 20){
     return words.slice(0, 20).join(' ') + '...';
   }else {
-    return text
+    return text;
   }
 });
 
